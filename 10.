@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Create dynamic integer using new
+    int *p = new int;
+
+    // Modify value through pointer
+    *p = 25;
+
+    // Print value
+    cout << "Value stored in dynamic variable: " << *p << endl;
+
+    // Properly delete allocated memory
+    delete p;
+
+    return 0;
+}
+
