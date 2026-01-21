@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+// Global variable
+int globalVar = 10;
+
+int main() {
+    cout << "Value of global variable: " << globalVar << endl;
+
+using namespace std;
+
+    // Local variable
+    int localVar = 10;
+
+    cout << "Value of local variable: " << localVar << endl;
+
+    // Dynamically allocated variable
+    int* heapVar = new int;
+    *heapVar = 30;
+
+    // Printing addresses
+    cout << "Address of Global Variable  : " << &globalVar << endl;
+    cout << "Address of Local Variable   : " << &localVar << endl;
+    cout << "Address of Heap Variable    : " << heapVar << endl;
+
+    // Free dynamically allocated memory
+    delete heapVar;
+
+    return 0;
+}
