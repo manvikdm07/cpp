@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 10;      // normal variable
+    int *p = &a;     // pointer storing address of a
+
+    // Printing required values
+    cout << "Value of variable a: " << a << endl;
+    cout << "Address of variable a: " << &a << endl;
+    cout << "Value stored in pointer p: " << p << endl;
+
+    return 0;
+}
