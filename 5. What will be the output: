@@ -1,0 +1,6 @@
+int x = 5;        // x is initialized with value 5
+int *p = &x;     // p stores the address of x
+*p = 10;         // value at that address is changed to 10
+cout << x;       // prints the value of x
+
+output = 10
