@@ -1,0 +1,7 @@
+int x = 10;
+int *p = &x;
+int **pp = &p;
+**pp = 20;
+cout << x;
+
+output = 20
