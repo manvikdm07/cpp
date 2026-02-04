@@ -1,0 +1,17 @@
+int arr[] = {10, 20, 30, 40};
+int *p = arr;
+
+cout << *p << endl;
+cout << *(p + 1) << endl;
+cout << *(p + 3) << endl;
+
+10
+20
+40
+
+why?  
+1. arr is an array of integers.
+2. The name arr points to the first element of the array.
+So when we write:
+int *p = arr;
+p now stores the address of arr[0].
