@@ -1,0 +1,17 @@
+int arr[] = {5, 10, 15, 20};
+int *p = arr + 2;
+
+cout << *p << endl;
+cout << *(p - 1) << endl;
+
+output :
+15
+10
+
+Why this works?
+1. Pointer arithmetic works in both directions
+
+2. p + n → move forward n elements
+
+3. p - n → move backward n elements
+Not bytes—elements.
