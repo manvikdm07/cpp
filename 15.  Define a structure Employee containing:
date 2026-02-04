@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+struct Employee {
+    int emp_id;
+    string name;
+    float basic_salary;
+};
+
+int main() {
+    Employee e;
+    float hra, da, gross_salary;
+
+    // Input details
+    cout << "Enter Employee ID: ";
+    cin >> e.emp_id;
+
+    cout << "Enter Name: ";
+    cin >> e.name;
+
+    cout << "Enter Basic Salary: ";
+    cin >> e.basic_salary;
+
+    // Calculate salary
+    hra = 0.20 * e.basic_salary;
+    da = 0.10 * e.basic_salary;
+    gross_salary = e.basic_salary + hra + da;
+
+    // Display output
+    cout << "\nEmployee Details\n";
+    cout << "ID: " << e.emp_id << endl;
+    cout << "Name: " << e.name << endl;
+    cout << "Gross Salary: " << gross_salary << endl;
+
+    return 0;
+}
