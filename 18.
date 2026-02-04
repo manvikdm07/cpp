@@ -1,0 +1,13 @@
+int arr[] = {2, 4, 6, 8};
+int *p = arr;
+
+p++;
+cout << *p << endl;
+
+output : 4
+
+why?
+cout << *p << endl;
+
+Dereferencing p gives the value at arr[1]
+Value = 4
