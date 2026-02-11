@@ -1,0 +1,48 @@
+Swap Two Numbers Using Pointers
+Write a C++ program that swaps two numbers using pointers. The program should:
+- Declare two integer variables.
+- Use a pointer to swap their values.
+Print the swapped values.
+
+
+
+#include <iostream>
+using namespace std;
+
+// Function to swap two numbers using pointers
+void swap(int* x, int* y) {
+    int temp = *x;  // Store the value pointed to by x in temp
+    *x = *y;        // Assign the value pointed to by y to the location pointed to by x
+    *y = temp;      // Assign the temp value to the location pointed to by y
+}
+
+int main() {
+    // Declare two integer variables
+    int a = 5;
+    int b = 10;
+    
+    // Declare pointers to the variables
+    int* ptrA = &a;
+    int* ptrB = &b;
+    
+    // Print original values
+    cout << "Before swap: a = " << a << ", b = " << b << endl;
+    
+    // Swap the values using pointers
+    swap(ptrA, ptrB);
+    
+    // Print swapped values
+    cout << "After swap: a = " << a << ", b = " << b << endl;
+    
+    return 0;
+}
+
+
+
+output :
+
+Before swap: a = 5, b = 10
+After swap: a = 10, b = 5
+
+
+=== Code Execution Successful ===
