@@ -1,0 +1,164 @@
+Write a C++ program that implements a circular buffer using a dynamically allocated array. The program should:
+- Dynamically allocate memory for the buffer.
+- Allow the user to add and remove elements.
+- Handle overflow and underflow conditions.
+Properly deallocate the memory used by the buffer.
+
+
+
+#include <iostream>
+using namespace std;
+
+class CircularBuffer {
+private:
+    int* buffer;
+    int capacity;
+    int head;
+    int tail;
+    int size;
+
+public:
+    // Constructor: Dynamically allocate memory for the buffer
+    CircularBuffer(int cap) {
+        capacity = cap;
+        buffer = new int[capacity];
+        head = 0;
+        tail = 0;
+        size = 0;
+    }
+
+    // Destructor: Deallocate the memory
+    ~CircularBuffer() {
+        delete[] buffer;
+    }
+
+    // Check if the buffer is empty
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    // Check if the buffer is full
+    bool isFull() {
+        return size == capacity;
+    }
+
+    // Add an element to the buffer (enqueue)
+    void enqueue(int value) {
+        if (isFull()) {
+            cout << "Buffer overflow: Cannot add element, buffer is full." << endl;
+            return;
+        }
+        buffer[tail] = value;
+        tail = (tail + 1) % capacity;
+        size++;
+        cout << "Added " << value << " to the buffer." << endl;
+    }
+
+    // Remove an element from the buffer (dequeue)
+    void dequeue() {
+        if (isEmpty()) {
+            cout << "Buffer underflow: Cannot remove element, buffer is empty." << endl;
+            return;
+        }
+        int value = buffer[head];
+        head = (head + 1) % capacity;
+        size--;
+        cout << "Removed " << value << " from the buffer." << endl;
+    }
+
+    // Display the current elements in the buffer
+    void display() {
+        if (isEmpty()) {
+            cout << "Buffer is empty." << endl;
+            return;
+        }
+        cout << "Buffer elements: ";
+        int i = head;
+        for (int count = 0; count < size; count++) {
+            cout << buffer[i] << " ";
+            i = (i + 1) % capacity;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    int capacity;
+    cout << "Enter the capacity of the circular buffer: ";
+    cin >> capacity;
+
+    CircularBuffer cb(capacity);
+
+    int choice;
+    do {
+        cout << "\nMenu:\n";
+        cout << "1. Add element (enqueue)\n";
+        cout << "2. Remove element (dequeue)\n";
+        cout << "3. Display buffer\n";
+        cout << "4. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                int value;
+                cout << "Enter value to add: ";
+                cin >> value;
+                cb.enqueue(value);
+                break;
+            }
+            case 2:
+                cb.dequeue();
+                break;
+            case 3:
+                cb.display();
+                break;
+            case 4:
+                cout << "Exiting program." << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please try again." << endl;
+        }
+    } while (choice != 4);
+
+    // Memory is automatically deallocated by the destructor when cb goes out of scope
+
+    return 0;
+}
+
+
+output :
+
+Enter the capacity of the circular buffer: 4
+
+Menu:
+1. Add element (enqueue)
+2. Remove element (dequeue)
+3. Display buffer
+4. Exit
+Enter your choice: 2
+Buffer underflow: Cannot remove element, buffer is empty.
+
+Menu:
+1. Add element (enqueue)
+2. Remove element (dequeue)
+3. Display buffer
+4. Exit
+Enter your choice: 1
+Enter value to add: 345
+Added 345 to the buffer.
+
+Menu:
+1. Add element (enqueue)
+2. Remove element (dequeue)
+3. Display buffer
+4. Exit
+Enter your choice: 3
+Buffer elements: 345 
+
+Menu:
+1. Add element (enqueue)
+2. Remove element (dequeue)
+3. Display buffer
+4. Exit
+Enter your choice: 
