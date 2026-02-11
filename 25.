@@ -1,0 +1,70 @@
+Write a C++ program where a function returns a reference to a local variable. What are  potential problems and how to avoid them. Implement a version where the function returns a reference to a static or globally declared variable.
+
+
+#include <iostream>
+using namespace std;
+
+// Problematic function: Returns a reference to a local variable
+int& badFunction() {
+    int localVar = 10;
+    return localVar;  // This is dangerous: localVar is destroyed when the function returns
+}
+
+int main() {
+    // This will lead to undefined behavior
+    int& ref = badFunction();
+    cout << "Value from badFunction: " << ref << endl;  // May print garbage or crash
+    // Uncommenting the next line might cause issues:
+    // ref = 20;  // Attempting to modify could corrupt memory
+    return 0;
+}
+
+Potential Problems with Returning a Reference to a Local Variable:
+- Undefined Behavior: When a function returns, its local variables are destroyed (their memory is deallocated).
+- Memory Corruption: If you try to modify the referenced value, you might overwrite memory
+- Compiler Warnings: Modern compilers (e.g., GCC, Clang) often issue warnings like "reference to local variable returned,"
+- Not Thread-Safe: In multi-threaded programs, this can lead to race conditions or undefined interactions with deallocated memory.
+
+How to Avoid These Problems:
+- Return by Value
+- Use Static or Global Variables
+- Dynamic Memory Allocation
+- Avoid References for Temporaries
+
+
+correct code :
+
+#include <iostream>
+using namespace std;
+
+// Safe function: Returns a reference to a static variable
+int& goodFunction() {
+    static int staticVar = 10;  // Static variable persists across calls
+    return staticVar;
+}
+
+int main() {
+    // Safe: staticVar exists for the program's lifetime
+    int& ref = goodFunction();
+    cout << "Initial value from goodFunction: " << ref << endl;
+    
+    // Can safely modify the referenced value
+    ref = 20;
+    cout << "Modified value: " << ref << endl;
+    
+    // Call again: staticVar retains its value
+    int& ref2 = goodFunction();
+    cout << "Value from second call: " << ref2 << endl;  // Prints 20
+    
+    return 0;
+}
+
+
+output :
+
+Initial value from goodFunction: 10
+Modified value: 20
+Value from second call: 20
+
+
+=== Code Execution Successful ===
