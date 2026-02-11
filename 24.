@@ -1,0 +1,42 @@
+Write a C++ program that demonstrates the use of a pointer to a constant variable. The program should:
+- Declare a constant variable and a pointer to it.
+Show how you can read the value pointed to by the pointer, but not modify it.
+
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Declare a constant integer variable
+    const int constantVar = 42;
+    
+    // Declare a pointer to a constant integer and point it to the constant variable
+    const int* ptr = &constantVar;
+    
+    // Read and print the value pointed to by the pointer
+    cout << "Value of constantVar through pointer: " << *ptr << endl;
+    
+    // Demonstrate that you cannot modify the value through the pointer
+    // Uncommenting the line below would cause a compile error:
+    // *ptr = 100;  // Error: assignment of read-only location '*ptr'
+    
+    // You can reassign the pointer to point to another constant or non-constant variable
+    int anotherVar = 50;
+    ptr = &anotherVar;
+    cout << "Value of anotherVar through pointer: " << *ptr << endl;
+    
+    // Still cannot modify through the pointer, even if pointing to a non-const variable
+    // *ptr = 60;  // Error: assignment of read-only location '*ptr'
+    
+    return 0;
+}
+
+
+output :
+
+Value of constantVar through pointer: 42
+Value of anotherVar through pointer: 50
+
+
+=== Code Execution Successful ===
