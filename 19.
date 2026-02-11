@@ -134,3 +134,16 @@ int main() {
 
     return 0;
 }
+
+
+
+output :
+
+List after inserting 30, 20, 10 at beginning: 30 20 10 
+List after inserting 40 and 50 at end: 30 20 10 40 50 
+List after deleting 20: 30 10 40 50 
+Value not found in the list.
+List after attempting to delete 100: 30 10 40 50 
+
+
+=== Code Execution Successful ===
