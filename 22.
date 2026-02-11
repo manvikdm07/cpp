@@ -1,0 +1,84 @@
+Write a C++ program that dynamically allocates memory for an array of strings (an array of pointers). The program should:
+- Allow the user to input multiple strings.
+- Print all the strings using the array of pointers.
+Free the allocated memory for each string and the array of pointers using delete[].
+
+
+#include <iostream>
+#include <string>
+#include <cstring>
+using namespace std;
+
+int main() {
+    int n;
+    
+    // Prompt user for the number of strings
+    cout << "Enter the number of strings: ";
+    cin >> n;
+    
+    // Consume the newline character left by cin
+    cin.ignore();
+    
+    // Dynamically allocate an array of pointers to char (for strings)
+    char** arr = new char*[n];
+    
+    // Check if memory allocation was successful
+    if (arr == nullptr) {
+        cout << "Memory allocation failed for array of pointers." << endl;
+        return 1;
+    }
+    
+    // Input strings from the user
+    for (int i = 0; i < n; ++i) {
+        string temp;
+        cout << "Enter string " << (i + 1) << ": ";
+        getline(cin, temp);
+        
+        // Dynamically allocate memory for each string
+        arr[i] = new char[temp.length() + 1];
+        
+        // Check if allocation for string failed
+        if (arr[i] == nullptr) {
+            cout << "Memory allocation failed for string " << (i + 1) << "." << endl;
+            // Free previously allocated memory
+            for (int j = 0; j < i; ++j) {
+                delete[] arr[j];
+            }
+            delete[] arr;
+            return 1;
+        }
+        
+        // Copy the string to the allocated memory
+        strcpy(arr[i], temp.c_str());
+    }
+    
+    // Print all the strings
+    cout << "\nThe strings are:" << endl;
+    for (int i = 0; i < n; ++i) {
+        cout << arr[i] << endl;
+    }
+    
+    // Free the dynamically allocated memory for each string
+    for (int i = 0; i < n; ++i) {
+        delete[] arr[i];
+    }
+    
+    // Free the array of pointers
+    delete[] arr;
+    
+    // Set pointer to nullptr for safety
+    arr = nullptr;
+    
+    return 0;
+}
+
+
+output :
+
+Enter the number of strings: 1 2 3
+Enter string 1: 
+The strings are:
+2 3
+
+
+=== Code Execution Successful ===
